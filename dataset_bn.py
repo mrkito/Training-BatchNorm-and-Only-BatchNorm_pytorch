@@ -51,7 +51,7 @@ def get_loaders(
         train_transforms_fn,
         val_transforms_fn,
         batch_size=64,
-        num_workers=4, ):
+        num_workers=12, ):
     train_loader = DataLoader(dataset=BnDataset(get_dataset(train_dir), train_transforms_fn), batch_size=batch_size,
                               shuffle=True, num_workers=num_workers,
                               drop_last=False)
@@ -65,19 +65,3 @@ def get_loaders(
     loaders["valid"] = valid_loader
 
     return loaders
-
-
-if __name__ == '__main__':
-
-    train_data_transforms, val_data_transforms = get_train_transforms(224), get_val_transforms(224)
-
-    loaders = get_loaders(
-        train_dir=train_dir,
-        val_dir=val_dir,
-        train_transforms_fn=train_data_transforms,
-        val_transforms_fn=val_data_transforms,
-        batch_size=batch_size,
-    )
-
-    for b in loaders["train"]:
-        b
