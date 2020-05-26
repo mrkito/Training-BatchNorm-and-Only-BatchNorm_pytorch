@@ -2,6 +2,7 @@ from torch.hub import load_state_dict_from_url
 from torchvision.models import resnet18
 import torch
 import torch.nn as nn
+
 __all__ = ['ResNet', 'resnet18']
 
 model_urls = {
@@ -60,11 +61,9 @@ class BasicBlock(nn.Module):
         return out
 
 
-
-
 class ResNet(nn.Module):
 
-    def __init__(self, train_bn,block, layers, num_classes=10, zero_init_residual=False,
+    def __init__(self, train_bn, block, layers, num_classes=10, zero_init_residual=False,
                  groups=1, width_per_group=64, replace_stride_with_dilation=None,
                  norm_layer=None):
         super(ResNet, self).__init__()
@@ -89,14 +88,11 @@ class ResNet(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
         self.layer1 = self._make_layer(block, 64, layers[0])
-        self.layer2 = self._make_layer(block, 128, layers[1], stride=2,
-                                       dilate=replace_stride_with_dilation[0])
-        self.layer3 = self._make_layer(block, 256, layers[2], stride=2,
-                                       dilate=replace_stride_with_dilation[1])
-        self.layer4 = self._make_layer(block, 512, layers[3], stride=2,
-                                       dilate=replace_stride_with_dilation[2])
+        self.layer2 = self._make_layer(block, 128, layers[1], stride=2, dilate=replace_stride_with_dilation[0])
+        self.layer3 = self._make_layer(block, 256, layers[2], stride=2, dilate=replace_stride_with_dilation[1])
+        self.layer4 = self._make_layer(block, 512, layers[3], stride=2, dilate=replace_stride_with_dilation[2])
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
-        self.fc = nn.Linear(512 , num_classes)
+        self.fc = nn.Linear(512, num_classes)
 
         # for m in self.modules():
         #     if isinstance(m, nn.Conv2d):
@@ -159,8 +155,8 @@ class ResNet(nn.Module):
         return self._forward_impl(x)
 
 
-def _resnet(train_bn ,arch, block, layers, pretrained, progress, **kwargs):
-    model = ResNet(train_bn,block, layers,  **kwargs)
+def _resnet(train_bn, arch, block, layers, pretrained, progress, **kwargs):
+    model = ResNet(train_bn, block, layers, **kwargs)
     if pretrained:
         state_dict = load_state_dict_from_url(model_urls[arch],
                                               progress=progress)
@@ -176,7 +172,7 @@ def resnet18(train_bn=True, pretrained=False, progress=True, **kwargs):
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet(train_bn,'resnet18', BasicBlock, [2, 2, 2, 2], pretrained, progress,
+    return _resnet(train_bn, 'resnet18', BasicBlock, [2, 2, 2, 2], pretrained, progress,
                    **kwargs)
 
 
