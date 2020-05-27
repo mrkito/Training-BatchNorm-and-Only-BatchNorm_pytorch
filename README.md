@@ -2,25 +2,36 @@
 Training-BatchNorm-and-Only-BatchNorm pytorch
 
 dataset : https://github.com/fastai/imagenette
-
-1) Train resnet18 
  ```
-python .py
+python train_loop.py
 ```
-<img src="imgs/resnet_acc.png" width="700px" height="450px"/>
-<img src="imgs/resnet_loss.png" width="700px" height="450px"/>
+1) Train resnet18 
+
+ResNet18 with an LR schedule and all the layers as trainable
+
+<img src="imgs/accuracy01_resnet.png" width="700px" height="450px"/>
 
 2) Train resnet18 without batchnorm 
+ResNet18 with an LR schedule and all the layers as trainable without batchnorm 
 
-<img src="imgs/resnet_no_bn_acc.png" width="700px" height="450px"/>
-<img src="imgs/resnet_no_bn_loss.png" width="700px" height="450px"/>
+<img src="imgs/accuracy01_resnet_no_bn.png" width="700px" height="450px"/>
 
 3) Train resnet18 only batchnorm
 
-<img src="imgs/resnet_bn_only_acc.png" width="700px" height="450px"/>
-<img src="imgs/resnet_bn_only_loss.png" width="700px" height="450px"/>
+ResNet18 with an LR schedule and only  batchnorm layers trainable
+
+<img src="imgs/accuracy01_resnet_bn_only.png" width="700px" height="450px"/>
 
 
+Result:
+
+<img src="imgs/accuracy_val.png" width="700px" height="450px"/>
+<img src="imgs/loss_val.png" width="700px" height="450px"/>
+
+
+Visualization:
+
+visualization.ipynb
 
 
 # Citation
