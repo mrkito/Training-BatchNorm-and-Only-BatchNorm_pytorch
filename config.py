@@ -1,16 +1,15 @@
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
-batch_size=64
+batch_size = 64
 
-train_dir='/home/deepkot/Downloads/imagenette2-160/train/'
-val_dir='/home/deepkot/Downloads/imagenette2-160/val/'
+train_dir = 'imagenette2-160/train/'
+val_dir = 'imagenette2-160/val/'
 
 
 def get_train_transforms(size):
     TRAIN_TRANSFORMS = A.Compose([
         A.Resize(size, size),
-
         A.HorizontalFlip(p=0.5),
         A.Rotate(limit=30),
         A.ImageCompression(),
@@ -46,7 +45,6 @@ def get_train_transforms(size):
 
 def get_val_transforms(size):
     VALID_TRANSFORMS = A.Compose([
-
         A.Resize(size, size),
         A.Normalize(),
         ToTensorV2(),
