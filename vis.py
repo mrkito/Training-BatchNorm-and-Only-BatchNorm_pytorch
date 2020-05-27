@@ -49,7 +49,7 @@ def plot_tensorboard_log_custom(
                     pass
 
     layout = go.Layout(
-        title='loss',
+        title='accuracy',
         height=height,
         width=width,
         yaxis={"hoverformat": ".5f"},
